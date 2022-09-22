@@ -1,5 +1,33 @@
 import { removeChildNodes, getNameInitials } from "../utils";
 
+const cssClasses = {
+  showClass: "show",
+  hideClass: "hide"
+};
+
+const showMore = "Show more";
+const showLess = "Show less";
+
+/**
+ * Function which updates classes of node to animate toggle for accordion
+ *
+ * @param {Node} postNode node whose classes will be updated
+ * @param {Node} postButton button whose text will be updated
+ */
+const handlePostOnClick = (postNode, postButton) => {
+  if (postNode) {
+    if (postNode.classList.contains(cssClasses.showClass)) {
+      postNode.classList.remove(cssClasses.showClass);
+      postNode.classList.add(cssClasses.hideClass);
+      postButton.innerHTML = showMore;
+    } else if (postNode.classList.contains(cssClasses.hideClass)) {
+      postNode.classList.remove(cssClasses.hideClass);
+      postNode.classList.add(cssClasses.showClass);
+      postButton.innerHTML = showLess;
+    }
+  }
+}
+
 /**
  * Function which creates a single paragraph tag, fills it with content, and returns the paragraph tag 
  *
@@ -34,29 +62,39 @@ const generateCardNode = (data) => {
   const templateId = "profile-post-item-template";
   const resultCardTemplate = document.getElementById(templateId);
   const clone = document.importNode(resultCardTemplate.content, true);
+  const authorInfoNode = clone.querySelector(".post-author-info");
   const authorName = clone.querySelector(".post-author-info .page-paragraph");
   const jobDesc = clone.querySelector(".post-author-info .page-micro");
   const postNode = clone.querySelector(".post-content");
   const avatarNode = clone.querySelector(".post-author-avatar");
 
-  authorName.innerHTML = `${authorFirstName} ${authorLastName}`;
+  const name = `${authorFirstName} ${authorLastName}`;
+  authorName.innerHTML = name;
   jobDesc.innerHTML = `${jobTitle} @ ${companyName}`;
   postNode.innerHTML = post;
+
+  //hide the post by default
+  postNode.classList.add(cssClasses.hideClass);
+  // accordion for posts
+  const toggleButton = document.createElement("button");
+  toggleButton.innerHTML = showLess;
+  toggleButton.addEventListener('click', () => handlePostOnClick(postNode, toggleButton));
+  authorInfoNode.appendChild(toggleButton);
 
   if (authorAvatarSrc) {
     const avatarImg = document.createElement("img");
     avatarImg.src = authorAvatarSrc;
     avatarImg.setAttribute(
       "aria-label",
-      `${authorFirstName} ${authorLastName}`
+      name
     );
     avatarNode.appendChild(avatarImg);
   }
 
-  else{
-    const initials = getNameInitials(`${authorFirstName} ${authorLastName}`);
+  else {
+    const initials = getNameInitials(name);
     // check if initials are defined
-    if(initials){
+    if (initials) {
       const initialsParagraph = document.createElement("p");
       initialsParagraph.innerHTML = initials;
       avatarNode.appendChild(initialsParagraph);
@@ -64,7 +102,7 @@ const generateCardNode = (data) => {
   }
 
   // checking if job description node is defined as we are rendering publish date and location information after job description
-  if(jobDesc){
+  if (jobDesc) {
     jobDesc.appendChild(createAndGetParagraphTag(publishDate));
     jobDesc.appendChild(createAndGetParagraphTag(`${city}, ${state}`));
   }
