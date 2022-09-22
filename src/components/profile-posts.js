@@ -1,6 +1,19 @@
 import { removeChildNodes } from "../utils";
 
 /**
+ * Function which creates a single paragraph tag, fills it with content, and returns the paragraph tag 
+ *
+ * @param {string} content content of the paragraph tag
+ * @return {Node} paragraph tag
+ */
+const createAndGetParagraphTag = (content) => {
+  const pTag = document.createElement("p");
+  pTag.innerHTML = content;
+  pTag.classList.add("page-micro");
+  return pTag;
+}
+
+/**
  * Function which generates a single Card node based on a dataset
  *
  * @param {object} data data containing attributes of a card
@@ -14,6 +27,9 @@ const generateCardNode = (data) => {
     jobTitle,
     companyName,
     post,
+    publishDate,
+    city,
+    state
   } = data;
   const templateId = "profile-post-item-template";
   const resultCardTemplate = document.getElementById(templateId);
@@ -35,6 +51,12 @@ const generateCardNode = (data) => {
       `${authorFirstName} ${authorLastName}`
     );
     avatarNode.appendChild(avatarImg);
+  }
+
+  // checking if job description node is defined as we are rendering publish date and location information after job description
+  if(jobDesc){
+    jobDesc.appendChild(createAndGetParagraphTag(publishDate));
+    jobDesc.appendChild(createAndGetParagraphTag(`${city}, ${state}`));
   }
 
   return clone;
