@@ -14,6 +14,7 @@ const generateListItemNode = (data) => {
   const nameNode = clone.querySelector("p.page-paragraph");
   const titleNode = clone.querySelector("p.page-micro");
   const avatarNode = clone.querySelector(".profile-list-item-avatar");
+  const topFriendNode = clone.querySelector("p.top-friend-flag");
 
   nameNode.innerHTML = `${name}`;
   titleNode.innerHTML = `${jobTitle} @ ${companyName}`;
@@ -27,6 +28,11 @@ const generateListItemNode = (data) => {
     avatarNode.appendChild(avatarImg);
   }
 
+  // if the friend is a top friend then set property of display to block from none to show visual indicator
+  // topFriendNode is always defined so not checking for null in this case
+  if(topFriend){
+    topFriendNode.style.display = "block";
+  }
   return clone;
 };
 
