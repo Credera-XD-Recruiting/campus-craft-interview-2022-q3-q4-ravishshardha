@@ -48,6 +48,25 @@
   margin-bottom: 8px;
 }
 
+.post-author-info button {
+  border: none;
+  background-color: inherit;
+  margin: 2% 0;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #0000FF;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.post-content.hide {
+  display: none;
+} 
+
+.post-content.show {
+  display: block;
+} 
+
 /* SKELETON LOADING */
 .post-content.skeleton-block {
   height: 125px;
