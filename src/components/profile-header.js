@@ -1,4 +1,5 @@
 import underlineSrc from "../assets/underline.svg";
+import { getNameInitials } from "../utils";
 
 export const updateProfileInformation = (data) => {
   const { firstName, lastName, avatarSrc } = data;
@@ -22,5 +23,13 @@ export const updateProfileInformation = (data) => {
 
   if (!avatarSrc) {
     profileAvatarNode.remove();
+    const initials = getNameInitials(`${firstName} ${lastName}`);
+    // check if initials are defined
+    if(initials){
+      const avatarNode = headerNode.querySelector(".profile-avatar");
+      const initialsParagraph = document.createElement("p");
+      initialsParagraph.innerHTML = initials;
+      avatarNode.appendChild(initialsParagraph);
+    }
   }
 };

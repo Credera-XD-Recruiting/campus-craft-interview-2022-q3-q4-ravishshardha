@@ -22,6 +22,12 @@
   width: 100%;
 }
 
+.profile-avatar p {
+  font-size: 60px;
+  color: var(--grayscale_0);
+  padding: 30%;
+}
+
 .profile-info {
   flex: 1;
   padding-left: 100px;

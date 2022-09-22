@@ -1,4 +1,4 @@
-import { removeChildNodes } from "../utils";
+import { removeChildNodes, getNameInitials } from "../utils";
 
 /**
  * Function which creates a single paragraph tag, fills it with content, and returns the paragraph tag 
@@ -51,6 +51,16 @@ const generateCardNode = (data) => {
       `${authorFirstName} ${authorLastName}`
     );
     avatarNode.appendChild(avatarImg);
+  }
+
+  else{
+    const initials = getNameInitials(`${authorFirstName} ${authorLastName}`);
+    // check if initials are defined
+    if(initials){
+      const initialsParagraph = document.createElement("p");
+      initialsParagraph.innerHTML = initials;
+      avatarNode.appendChild(initialsParagraph);
+    }
   }
 
   // checking if job description node is defined as we are rendering publish date and location information after job description

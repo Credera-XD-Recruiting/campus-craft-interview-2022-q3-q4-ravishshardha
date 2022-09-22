@@ -50,6 +50,13 @@
   width: 100%;
 }
 
+.profile-list-item-avatar p {
+  font-size: 30px;
+  color: var(--grayscale_0);
+  text-align: center;
+  line-height: 87px;
+}
+
 .profile-list-item-info {
   width: 100%;
   margin-left: 24px;

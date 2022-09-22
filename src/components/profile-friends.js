@@ -1,4 +1,4 @@
-import { removeChildNodes } from "../utils";
+import { getNameInitials, removeChildNodes } from "../utils";
 
 /**
  * Function which compares two strings
@@ -72,6 +72,16 @@ const generateListItemNode = (data) => {
     avatarImg.src = avatarSrc;
     avatarImg.setAttribute("aria-label", `${name}`);
     avatarNode.appendChild(avatarImg);
+  }
+  
+  else{
+    const initials = getNameInitials(name);
+    // check if initials are defined
+    if(initials){
+      const initialsParagraph = document.createElement("p");
+      initialsParagraph.innerHTML = initials;
+      avatarNode.appendChild(initialsParagraph);
+    }
   }
 
   // if the friend is a top friend then set property of display to block from none to show visual indicator
