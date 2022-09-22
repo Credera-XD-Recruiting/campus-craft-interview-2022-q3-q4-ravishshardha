@@ -17,7 +17,7 @@ const colors = {
 /**
  * Function which returns background color based on group activity
  *
- * @param {activity} activity activity of the group
+ * @param {string} activity activity of the group
  * @return {string} color for the group activity
  */
 const getBackgroundColorBasedOnGroupActivity = (activity) => {
