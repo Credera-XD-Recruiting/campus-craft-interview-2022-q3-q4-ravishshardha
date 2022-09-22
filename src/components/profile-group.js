@@ -1,4 +1,5 @@
 import { removeChildNodes } from "../utils";
+import group_favorite from  "../assets/group_favorite.png";
 
 const activityStates = {
   active: "active",
@@ -43,7 +44,7 @@ const getBackgroundColorBasedOnGroupActivity = (activity) => {
  * @return {Node} generated markup for a card
  */
 const generateCardNode = (data) => {
-  const { name, href, image, activity } = data;
+  const { name, href, image, activity, favorite } = data;
   const templateId = "profile-group-results-item-template";
   const resultCardTemplate = document.getElementById(templateId);
   const clone = document.importNode(resultCardTemplate.content, true);
@@ -56,6 +57,16 @@ const generateCardNode = (data) => {
   titleNode.innerHTML = `${name}`;
   referenceNode.href = href;
   groupImageNode.src = image;
+  // favorite group then add visual indicator
+  if(favorite){
+    const avatarNode = clone.querySelector("div.profile-group-avatar");
+    const avatarImg = document.createElement("img");
+    avatarImg.setAttribute("alt", "favorite group");
+    avatarImg.classList.add("favorite-group");
+    avatarImg.src = group_favorite;
+    avatarNode.appendChild(avatarImg);
+  }
+
   // update the background color of the card based on group activity
   referenceNode.style.backgroundColor = getBackgroundColorBasedOnGroupActivity(activity);
 
