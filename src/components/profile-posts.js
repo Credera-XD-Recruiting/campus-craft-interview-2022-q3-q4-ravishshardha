@@ -77,7 +77,7 @@ const generateCardNode = (data) => {
   postNode.classList.add(cssClasses.hideClass);
   // accordion for posts
   const toggleButton = document.createElement("button");
-  toggleButton.innerHTML = showLess;
+  toggleButton.innerHTML = showMore;
   toggleButton.addEventListener('click', () => handlePostOnClick(postNode, toggleButton));
   authorInfoNode.appendChild(toggleButton);
 
