@@ -64,6 +64,15 @@
   background-color: var(--grayscale_2);
 }
 
+.profile-group-avatar .favorite-group {
+  background-repeat: no-repeat;
+  width: 12%;
+  height: 11%;
+  background-color: transparent;
+  float: right;
+  margin-right: 1%;
+}
+
 /* SKELETON LOADING  */
 
 #profile-groups .skeleton-card {
